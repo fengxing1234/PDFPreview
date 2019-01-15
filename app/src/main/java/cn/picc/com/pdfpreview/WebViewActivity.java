@@ -16,10 +16,10 @@ import android.webkit.WebViewClient;
 import java.io.File;
 import java.net.URL;
 
+import static cn.picc.com.pdfpreview.MainActivity.PDF_PATH;
+
 public class WebViewActivity extends AppCompatActivity {
 
-
-    public static final String PDF_PATH = "pdf_path";
 
 
     private WebView pdfViewerWeb;
@@ -55,13 +55,13 @@ public class WebViewActivity extends AppCompatActivity {
                         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {//api >= 19
 
                             //加载资源文件中的pdf成功
-                            //preView("file:///android_asset/demo.pdf");
+                            preView("file:///android_asset/test.pdf");
 
                             //加载手机目录中的pdf 成功
                             //preView("file://" + pdfPath);
 
                             String http_url = "http://10.126.24.89:8080/demo.pdf";
-                            preView(http_url);
+                            //preView(http_url);
 
                             //download(http_url);
                         }
@@ -156,7 +156,7 @@ public class WebViewActivity extends AppCompatActivity {
         //1.只使用pdf.js渲染功能，自定义预览UI界面
 
         //assets path url 都可以访问
-        //pdfViewerWeb.loadUrl("file:///android_asset/index.html?" + pdfUrl);
+        pdfViewerWeb.loadUrl("file:///android_asset/index.html?" + pdfUrl);
 
 
         //3.pdf.js放到本地  都可以访问
