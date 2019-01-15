@@ -129,6 +129,11 @@ public class WebViewActivity extends AppCompatActivity {
         WebSettings webSettings = pdfViewerWeb.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
+        webSettings.setSupportZoom(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setDisplayZoomControls(false);
+
+
         webSettings.setPluginState(WebSettings.PluginState.ON);
         webSettings.setAllowContentAccess(true);
         webSettings.setAllowFileAccess(true);
