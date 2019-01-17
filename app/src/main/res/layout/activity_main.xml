@@ -39,4 +39,15 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_pdf_viewer" />
 
+    <TextView
+        android:id="@+id/tv_mu_pdf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:padding="4dp"
+        android:text="MuPdf方式"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_pdf_intent" />
+
 </android.support.constraint.ConstraintLayout>

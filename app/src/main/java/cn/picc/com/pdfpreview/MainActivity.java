@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.artifex.mupdf.mini.DocumentActivity;
+
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
@@ -38,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
                 getPdfFileIntent(new File(getPath()));
             }
         });
+        findViewById(R.id.tv_mu_pdf).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showMuPDF(new File(getPath()));
+            }
+        });
 
     }
 
@@ -59,6 +67,16 @@ public class MainActivity extends AppCompatActivity {
             intent.setDataAndType(uri, "application/pdf");
         }
         startActivity(Intent.createChooser(intent, "打开PDF文件"));
+    }
+
+
+    protected void showMuPDF(File file) {
+        Intent intent = new Intent(this, DocumentActivity.class);
+        // API>=21: intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT); /* launch as a new document */
+        //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET); /* launch as a new document */
+        //intent.setAction(Intent.ACTION_VIEW);
+        intent.setData(Uri.fromFile(file));
+        startActivity(intent);
     }
 
 }

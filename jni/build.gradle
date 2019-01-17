@@ -1,0 +1,72 @@
+apply plugin: 'com.android.library'
+apply plugin: 'maven'
+
+group = 'com.artifex.mupdf'
+version = '1.14.0'
+
+buildscript {
+	repositories {
+		jcenter()
+		google()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:3.1.0'
+	}
+}
+
+allprojects {
+	repositories {
+		jcenter()
+		google()
+	}
+}
+
+android {
+	compileSdkVersion 26
+
+	defaultConfig {
+		minSdkVersion 16
+		targetSdkVersion 26
+		externalNativeBuild.ndkBuild.arguments '-j4'
+
+		// Set ABI_FILTERS in your gradle.properties file
+		if (project.hasProperty('ABI_FILTERS')) {
+			ndk.abiFilters = []
+			ndk.abiFilters.addAll(ABI_FILTERS.split(',').collect{it as String})
+		}
+	}
+
+	sourceSets {
+		main {
+			manifest.srcFile 'AndroidManifest.xml'
+			java.srcDirs 'libmupdf/platform/java/src'
+		}
+	}
+
+	externalNativeBuild {
+		ndkBuild.path 'libmupdf/platform/java/Android.mk'
+	}
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			if (project.hasProperty('MAVEN_REPO')) {
+				repository(url: MAVEN_REPO)
+			} else {
+				repository(url: 'file://MAVEN')
+			}
+			pom {
+				artifactId = 'fitz'
+				project {
+					licenses {
+						license {
+							name 'GNU Affero General Public License'
+							url 'https://www.gnu.org/licenses/agpl-3.0.html'
+						}
+					}
+				}
+			}
+		}
+	}
+}
